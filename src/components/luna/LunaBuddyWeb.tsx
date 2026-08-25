@@ -11,8 +11,9 @@ import {
 } from '../../luna/messages'
 import type { LunaReaction } from '../../luna/reactions'
 import { getReactionWhisper } from '../../luna/reactions'
-import { SleepingPiggy } from '../ambient/SleepingPiggy'
-import { MemoryPuzzle } from '../../puzzle/MemoryPuzzle'
+import { AmbientCompanion } from '../ambient/AmbientCompanion'
+import { FloatingOrbs, ParallaxGlow } from '../ambient/FloatingOrbs'
+import { PuzzleExperience } from '../../puzzle/PuzzleExperience'
 import { StarMapView } from '../../starmap/StarMapView'
 import type { LunaCharacterHandle } from './LunaCharacter'
 import { LunaCharacter } from './LunaCharacter'
@@ -105,9 +106,11 @@ export function LunaBuddyWeb() {
 
   return (
     <div className={styles.page}>
+      <FloatingOrbs />
+      <ParallaxGlow />
       <RomanticAura />
       <Starfield count={55} />
-      <SleepingPiggy />
+      <AmbientCompanion />
 
       {tab === 'home' && (
         <div className={styles.bgMoon}>
@@ -137,7 +140,7 @@ export function LunaBuddyWeb() {
         ✦ Preview
       </button>
 
-      <main className={styles.main}>
+      <main className={`${styles.main} ${styles[`tab_${tab}`]}`}>
         {tab === 'home' && (
           <>
             <section className={`${styles.hero} ${appeared ? styles.heroIn : ''}`}>
@@ -197,7 +200,7 @@ export function LunaBuddyWeb() {
         )}
 
         {tab === 'sky' && <StarMapView />}
-        {tab === 'memories' && <MemoryPuzzle />}
+        {tab === 'memories' && <PuzzleExperience />}
       </main>
 
       {previewOpen && (

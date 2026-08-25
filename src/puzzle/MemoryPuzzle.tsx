@@ -16,7 +16,7 @@ function loadStoredImage(): string | null {
   }
 }
 
-export function MemoryPuzzle() {
+export function MemoryPuzzle({ embedded = false }: { embedded?: boolean }) {
   const [board, setBoard] = useState(shuffleBoard)
   const [moves, setMoves] = useState(0)
   const [won, setWon] = useState(false)
@@ -87,12 +87,14 @@ export function MemoryPuzzle() {
 
   return (
     <div className={styles.wrap}>
-      <header className={styles.header}>
-        <h2 className={styles.title}>Memory constellation</h2>
-        <p className={styles.subtitle}>
-          {unlocked} of {DAILY_MEMORIES.length} memories · slide tiles to reveal today&apos;s
-        </p>
-      </header>
+      {!embedded && (
+        <header className={styles.header}>
+          <h2 className={styles.title}>Memory constellation</h2>
+          <p className={styles.subtitle}>
+            {unlocked} of {DAILY_MEMORIES.length} memories · slide tiles to reveal today&apos;s
+          </p>
+        </header>
+      )}
 
       {todaysMemory && (
         <article className={`${styles.memoryCard} ${won ? styles.memoryCardRevealed : ''}`}>

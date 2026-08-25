@@ -11,6 +11,7 @@ interface PuzzleBoardProps {
   won?: boolean
   onTileClick?: (index: number) => void
   showNumbers?: boolean
+  highlightIndex?: number | null
 }
 
 export function PuzzleBoard({
@@ -22,6 +23,7 @@ export function PuzzleBoard({
   won = false,
   onTileClick,
   showNumbers = false,
+  highlightIndex = null,
 }: PuzzleBoardProps) {
   return (
     <div
@@ -36,7 +38,7 @@ export function PuzzleBoard({
           <button
             key={`${index}-${value}`}
             type="button"
-            className={`${styles.tile} ${isEmpty ? styles.tileEmpty : ''}`}
+            className={`${styles.tile} ${isEmpty ? styles.tileEmpty : ''} ${won ? styles.tileWon : ''} ${highlightIndex === index ? styles.tileSelected : ''}`}
             style={imageStyle}
             disabled={!interactive || isEmpty}
             onClick={() => onTileClick?.(index)}

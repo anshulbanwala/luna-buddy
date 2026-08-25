@@ -26,6 +26,16 @@
   border-color: rgba(212, 188, 130, 0.25);
 }
 
+.tileWon {
+  border-color: rgba(209, 184, 122, 0.35);
+}
+
+.tileSelected {
+  border-color: rgba(235, 140, 158, 0.65);
+  box-shadow: 0 0 16px rgba(235, 140, 158, 0.25);
+  transform: scale(1.03);
+}
+
 .tile {
   position: relative;
   border-radius: 10px;

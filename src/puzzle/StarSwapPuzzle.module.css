@@ -1,0 +1,48 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hint {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.gridWrap {
+  transition: filter 0.3s ease;
+}
+
+.gridSelecting {
+  filter: drop-shadow(0 0 24px rgba(212, 188, 130, 0.12));
+}
+
+.stats {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.stats button,
+.uploadBtn {
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+}
+
+.uploadBtn {
+  border-color: rgba(212, 188, 130, 0.3);
+  color: #d4bc82;
+}
+
+.win {
+  color: #d4bc82;
+}

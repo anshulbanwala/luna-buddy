@@ -7,36 +7,32 @@ export function PuzzlePreviewGallery() {
   return (
     <div className={styles.wrap}>
       <p className={styles.intro}>
-        Each day unlocks a memory. The puzzle uses emoji tiles by default — upload a photo on the Memories tab to
-        convert it into tile slices.
+        Three puzzle styles — inspired by Snap Puzzle, Selfie Shuffle, and memory-game repos.
+        Upload photos on the Memories tab; drop files in <code>public/photos/</code>.
       </p>
 
-      <div className={styles.states}>
-        <div className={styles.stateCard}>
-          <span className={styles.label}>Shuffled</span>
+      <div className={styles.modeRow}>
+        <div className={styles.modeCard}>
+          <h4>☄️ Orbit Slide</h4>
           <PuzzleBoardPreview emoji="🌙" />
+          <span>Classic empty-tile slide</span>
         </div>
-        <div className={styles.stateCard}>
-          <span className={styles.label}>Solved</span>
-          <PuzzleBoardPreview emoji="🌙" solved />
+        <div className={styles.modeCard}>
+          <h4>🔄 Star Swap</h4>
+          <PuzzleBoard board={[1, 2, 3, 4, 0, 6, 7, 5, 8]} emoji="📸" size="sm" showNumbers />
+          <span>Tap two tiles to swap</span>
         </div>
-        <div className={styles.stateCard}>
-          <span className={styles.label}>Photo mode</span>
-          <div className={styles.photoDemo}>
-            <div className={styles.photoTile} style={{ backgroundPosition: '0% 0%' }} />
-            <div className={styles.photoTile} style={{ backgroundPosition: '50% 0%' }} />
-            <div className={styles.photoTile} style={{ backgroundPosition: '100% 0%' }} />
-            <div className={styles.photoTile} style={{ backgroundPosition: '0% 50%' }} />
-            <div className={styles.photoEmpty} />
-            <div className={styles.photoTile} style={{ backgroundPosition: '100% 50%' }} />
-            <div className={styles.photoTile} style={{ backgroundPosition: '0% 100%' }} />
-            <div className={styles.photoTile} style={{ backgroundPosition: '50% 100%' }} />
-            <div className={styles.photoTile} style={{ backgroundPosition: '100% 100%' }} />
+        <div className={styles.modeCard}>
+          <h4>✦ Constellation Match</h4>
+          <div className={styles.miniFlip}>
+            <div className={styles.flipOpen}>🌙</div>
+            <div className={styles.flipBack}>✦</div>
           </div>
+          <span>Flip memory pairs</span>
         </div>
       </div>
 
-      <h4 className={styles.gridTitle}>All daily puzzles</h4>
+      <h4 className={styles.gridTitle}>All 18 daily puzzles (emoji tiles)</h4>
       <div className={styles.memoryGrid}>
         {DAILY_MEMORIES.map((mem, i) => (
           <article key={mem.title} className={styles.memoryPreview}>

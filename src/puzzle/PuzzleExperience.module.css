@@ -1,0 +1,112 @@
+.wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #fff9f0 0%, #eb8c9e 50%, #8b7ec8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.modePicker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modeBtn {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px 12px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--glass-bg, rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(16px);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.45s var(--ease-flow, ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modeBtn:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.modeBtnActive {
+  border-color: rgba(212, 188, 130, 0.35);
+  background: linear-gradient(135deg, rgba(212, 188, 130, 0.1), rgba(139, 126, 200, 0.08));
+  box-shadow: var(--shadow-glow, 0 0 40px rgba(139, 126, 200, 0.12));
+}
+
+.modeIcon {
+  grid-row: 1 / 3;
+  font-size: 22px;
+  align-self: center;
+}
+
+.modeLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(250, 245, 232, 0.92);
+}
+
+.modeDesc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.stage {
+  animation: stageIn 0.5s var(--ease-flow, ease) forwards;
+}
+
+@keyframes stageIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 520px) {
+  .modePicker {
+    flex-direction: row;
+  }
+
+  .modeBtn {
+    flex: 1;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .modeIcon {
+    grid-row: auto;
+    justify-self: center;
+  }
+}
