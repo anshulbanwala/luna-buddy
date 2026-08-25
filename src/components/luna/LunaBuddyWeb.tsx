@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { getOrbitalAge, TARGET_YEAR } from '../../config/personal'
+import { getOrbitalAge } from '../../config/personal'
 import { useTemporalEvent } from '../../hooks/useTemporalEvent'
-import { getLunarState } from '../../utils/lunar'
 import {
   formatCountdown,
   getCountdownMessage,
@@ -11,19 +10,18 @@ import {
 } from '../../luna/messages'
 import type { LunaReaction } from '../../luna/reactions'
 import { getReactionWhisper } from '../../luna/reactions'
-import { AmbientCompanion } from '../ambient/AmbientCompanion'
+import { AmbientCompanion } from '../ambient/MochiWorld'
 import { FloatingOrbs, ParallaxGlow } from '../ambient/FloatingOrbs'
 import { PuzzleExperience } from '../../puzzle/PuzzleExperience'
+import { HomeTerrace } from '../../shell/HomeTerrace'
 import { StarMapView } from '../../starmap/StarMapView'
-import type { LunaCharacterHandle } from './LunaCharacter'
 import { LunaCharacter } from './LunaCharacter'
 import { LunaPreviewPanel } from './LunaPreviewPanel'
-import { MoonPhaseDisc } from './MoonPhaseDisc'
 import { RomanticAura } from './RomanticAura'
 import { Starfield } from './Starfield'
 import styles from './LunaBuddyWeb.module.css'
 
-type Tab = 'home' | 'sky' | 'memories'
+type Journey = 'terrace' | 'sky' | 'keepsakes'
 
 export interface LunaPreviewState {
   loveMode: boolean
@@ -37,28 +35,30 @@ const defaultPreview: LunaPreviewState = {
   greetingHour: null,
 }
 
+const NAV: { id: Journey; label: string; icon: string }[] = [
+  { id: 'terrace', label: 'Tonight', icon: '🏠' },
+  { id: 'sky', label: 'Sky book', icon: '🌌' },
+  { id: 'keepsakes', label: 'Keepsakes', icon: '🧩' },
+]
+
 function pad(n: number): string {
   return n.toString().padStart(2, '0')
 }
 
 export function LunaBuddyWeb() {
   const temporal = useTemporalEvent()
-  const [tab, setTab] = useState<Tab>('home')
-  const [appeared, setAppeared] = useState(false)
-  const [showMessage, setShowMessage] = useState(false)
+  const [journey, setJourney] = useState<Journey>('terrace')
   const [whisper, setWhisper] = useState<string | null>(null)
   const [previewOpen, setPreviewOpen] = useState(
     () => new URLSearchParams(window.location.search).has('preview'),
   )
   const [preview, setPreview] = useState<LunaPreviewState>(defaultPreview)
-  const lunaRef = useRef<LunaCharacterHandle>(null)
   const whisperTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const love = preview.loveMode || isLoveMode()
   const usingPreviewDays = preview.daysLeft >= 0
   const days = usingPreviewDays ? preview.daysLeft : temporal.remaining.days
   const isReached = usingPreviewDays ? preview.daysLeft === 0 : temporal.isReached
-  const lunar = getLunarState()
   const orbital = getOrbitalAge()
 
   const fakeDate = preview.greetingHour !== null
@@ -79,14 +79,11 @@ export function LunaBuddyWeb() {
         temporal.isReached,
       )
 
+  const daily = whisper ?? getDailyMessage(fakeDate)
+
   useEffect(() => {
-    const t1 = setTimeout(() => setAppeared(true), 80)
-    const t2 = setTimeout(() => setShowMessage(true), 700)
-    return () => {
-      clearTimeout(t1)
-      clearTimeout(t2)
-    }
-  }, [])
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [journey])
 
   const showWhisper = (reaction: LunaReaction) => {
     const text = getReactionWhisper(reaction, love)
@@ -95,112 +92,52 @@ export function LunaBuddyWeb() {
     whisperTimer.current = setTimeout(() => setWhisper(null), 3200)
   }
 
-  const handleReaction = (reaction: LunaReaction) => {
-    showWhisper(reaction)
-  }
-
-  const handlePreviewReaction = (reaction: LunaReaction) => {
-    lunaRef.current?.play(reaction)
-    showWhisper(reaction)
-  }
-
   return (
     <div className={styles.page}>
       <FloatingOrbs />
       <ParallaxGlow />
       <RomanticAura />
-      <Starfield count={55} />
-      <AmbientCompanion />
+      <Starfield count={40} />
+      <AmbientCompanion showCorner={journey === 'terrace'} />
 
-      {tab === 'home' && (
-        <div className={styles.bgMoon}>
-          <MoonPhaseDisc size={220} dim />
-        </div>
-      )}
-
-      <nav className={styles.nav} aria-label="Main">
-        {(['home', 'sky', 'memories'] as const).map((id) => (
+      <nav className={styles.dock} aria-label="Journey">
+        {NAV.map(({ id, label, icon }) => (
           <button
             key={id}
             type="button"
-            className={`${styles.navBtn} ${tab === id ? styles.navBtnActive : ''}`}
-            onClick={() => setTab(id)}
+            className={`${styles.dockBtn} ${journey === id ? styles.dockBtnActive : ''}`}
+            onClick={() => setJourney(id)}
           >
-            {id === 'home' ? 'Luna' : id === 'sky' ? 'Star map' : 'Memories'}
+            <span className={styles.dockIcon}>{icon}</span>
+            <span>{label}</span>
           </button>
         ))}
       </nav>
 
-      <button
-        type="button"
-        className={styles.previewFab}
-        onClick={() => setPreviewOpen(true)}
-        aria-label="Open preview gallery"
-      >
+      <button type="button" className={styles.previewFab} onClick={() => setPreviewOpen(true)}>
         ✦ Preview
       </button>
 
-      <main className={`${styles.main} ${styles[`tab_${tab}`]}`}>
-        {tab === 'home' && (
+      <main className={styles.main} key={journey}>
+        {journey === 'terrace' && (
           <>
-            <section className={`${styles.hero} ${appeared ? styles.heroIn : ''}`}>
-              <LunaCharacter
-                ref={lunaRef}
-                size={120}
-                loveMode={love}
-                onReaction={handleReaction}
-              />
-            </section>
-
-            {showMessage && (
-              <div className={styles.messages}>
-                <h1 className={styles.greeting}>{getGreeting(fakeDate)}</h1>
-                <p className={`${styles.daily} ${whisper ? styles.dailyWhisper : ''}`}>
-                  {whisper ?? getDailyMessage(fakeDate)}
-                </p>
-                {love && !whisper && <p className={styles.love}>You make today brighter.</p>}
-              </div>
-            )}
-
-            <section className={styles.countdownCard}>
-              <span className={styles.countdownLabel}>until 12 september {TARGET_YEAR}</span>
-              <p className={styles.countdownMsg}>{countdownMsg}</p>
-              <p className={styles.countdownLive} aria-live="polite">{liveCountdown}</p>
-              <p className={styles.countdownFmt}>{countdownFmt}</p>
-            </section>
-
-            <section className={styles.orbitBadge}>
-              <span className={styles.orbitLabel}>orbital age</span>
-              <p>{orbital.years} years · {orbital.days} days · {orbital.totalDays.toLocaleString()} sunrises</p>
-            </section>
-
-            <section className={styles.moonClock}>
-              <MoonPhaseDisc size={88} />
-              <div className={styles.moonData}>
-                <p className={styles.phaseName}>{lunar.phase}</p>
-                <div className={styles.stats}>
-                  <div>
-                    <span className={styles.statLabel}>glow</span>
-                    <span className={styles.statValue}>{lunar.illumination}%</span>
-                  </div>
-                  <div>
-                    <span className={styles.statLabel}>age</span>
-                    <span className={styles.statValue}>{lunar.age}d</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <button type="button" className={styles.skyCta} onClick={() => setTab('sky')}>
-              ✦ See the sky you were born under
-            </button>
-
-            <p className={styles.hint}>tap · double-tap ♥ · hold to hug</p>
+            <div className={styles.lunaFloat}>
+              <LunaCharacter size={100} loveMode={love} onReaction={showWhisper} />
+            </div>
+            <HomeTerrace
+              greeting={getGreeting(fakeDate)}
+              daily={daily}
+              countdownMsg={countdownMsg}
+              liveCountdown={liveCountdown}
+              countdownFmt={countdownFmt}
+              orbital={orbital}
+              onOpenSky={() => setJourney('sky')}
+              onOpenKeepsakes={() => setJourney('keepsakes')}
+            />
           </>
         )}
-
-        {tab === 'sky' && <StarMapView />}
-        {tab === 'memories' && <PuzzleExperience />}
+        {journey === 'sky' && <StarMapView />}
+        {journey === 'keepsakes' && <PuzzleExperience />}
       </main>
 
       {previewOpen && (
@@ -208,7 +145,7 @@ export function LunaBuddyWeb() {
           preview={preview}
           onChange={setPreview}
           onClose={() => setPreviewOpen(false)}
-          onPlayReaction={handlePreviewReaction}
+          onPlayReaction={showWhisper}
         />
       )}
     </div>

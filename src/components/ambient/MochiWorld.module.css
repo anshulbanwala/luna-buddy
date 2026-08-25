@@ -1,0 +1,295 @@
+.corner {
+  position: fixed;
+  bottom: calc(92px + env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 45;
+  pointer-events: none;
+}
+
+.mochi {
+  pointer-events: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  filter: drop-shadow(0 8px 20px rgba(255, 150, 170, 0.35));
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cornerTag {
+  position: absolute;
+  bottom: -6px;
+  right: -8px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #e8889e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 10px;
+  max-width: 180px;
+  padding: 10px 14px;
+  border-radius: 18px 18px 18px 4px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #4a3f55;
+  font-size: 12px;
+  line-height: 1.45;
+  box-shadow: 0 8px 28px rgba(232, 136, 158, 0.25);
+  animation: popIn 0.4s var(--ease-bounce, ease);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.bubble span:first-child {
+  font-size: 16px;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 12px;
+  color: #d4bc82;
+  pointer-events: none;
+  animation: sparkleOut 0.8s ease forwards;
+}
+
+.wiggle .body {
+  animation: wiggle 0.5s var(--ease-bounce, ease);
+}
+
+.body {
+  position: relative;
+  width: 64px;
+  height: 50px;
+  background: linear-gradient(165deg, #ffe0ea 0%, #ffb8c8 45%, #f498ae 100%);
+  border-radius: 52% 52% 46% 46%;
+  animation: idleBob 3s ease-in-out infinite;
+}
+
+.body_spin {
+  animation: pigSpin 1.2s linear infinite;
+}
+
+.body_sleep {
+  animation: idleBob 4s ease-in-out infinite;
+}
+
+.cheek {
+  position: absolute;
+  top: 22px;
+  width: 10px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 120, 140, 0.35);
+}
+
+.cheek:first-of-type {
+  left: 4px;
+}
+
+.cheek:last-of-type {
+  right: 4px;
+}
+
+.ear {
+  position: absolute;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  background: #ffb0c0;
+  border-radius: 50% 50% 25% 25%;
+}
+
+.ear:first-of-type {
+  left: 8px;
+  transform: rotate(-18deg);
+}
+
+.ear:last-of-type {
+  right: 8px;
+  transform: rotate(18deg) scaleX(-1);
+}
+
+.face {
+  position: absolute;
+  inset: 12px 10px 8px;
+}
+
+.eye {
+  position: absolute;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5a3540;
+}
+
+.eye:first-of-type {
+  left: 8px;
+}
+
+.eye:last-of-type {
+  right: 8px;
+}
+
+.eyeSleep {
+  height: 3px;
+  border-radius: 2px;
+  top: 2px;
+}
+
+.snout {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 14px;
+  background: #ffc4d4;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.nostril {
+  width: 3px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(100, 50, 60, 0.4);
+}
+
+.blanket {
+  position: absolute;
+  bottom: -5px;
+  left: -6px;
+  right: -6px;
+  height: 16px;
+  border-radius: 0 0 22px 22px;
+  background: linear-gradient(90deg, #cdb4db, #ffc8a2);
+  opacity: 0.85;
+}
+
+.zzz {
+  position: absolute;
+  top: -14px;
+  right: 0;
+  font-size: 10px;
+  color: #8b7ec8;
+  font-weight: 600;
+  animation: floatZ 1.4s ease-in-out infinite;
+}
+
+.spinStar {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #d4bc82;
+}
+
+.drifter {
+  position: fixed;
+  z-index: 34;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.2));
+}
+
+.ltr {
+  left: -90px;
+  animation: driftR 15s var(--ease-drift, ease-in-out) forwards;
+}
+
+.rtl {
+  right: -90px;
+  animation: driftL 15s var(--ease-drift, ease-in-out) forwards;
+}
+
+.drift_spin {
+  animation-duration: 11s;
+}
+
+.drift_balloon {
+  animation: driftUp 17s ease-in-out forwards;
+  left: 25% !important;
+}
+
+.driftWhisper {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@keyframes idleBob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-4px) rotate(1deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.9) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes sparkleOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.8) translateY(-12px); }
+}
+
+@keyframes floatZ {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(-5px); opacity: 1; }
+}
+
+@keyframes pigSpin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes driftR {
+  0% { opacity: 0; }
+  8% { opacity: 0.92; }
+  100% { opacity: 0; transform: translateX(calc(100vw + 120px)); }
+}
+
+@keyframes driftL {
+  0% { opacity: 0; }
+  8% { opacity: 0.92; }
+  100% { opacity: 0; transform: translateX(calc(-100vw - 120px)); }
+}
+
+@keyframes driftUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  12% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-110vh); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drifter {
+    display: none;
+  }
+}

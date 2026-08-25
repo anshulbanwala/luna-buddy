@@ -10,12 +10,16 @@
 - [x] Puzzle preview gallery shows all modes
 - [x] `public/photos/` folder for your images
 
-## Phase 2 — Characters
+## Phase 2 — Characters & flow (current)
 
+- [x] Mochi corner buddy with boop chain + sparkles
+- [x] Drifter with spin, balloon, wave, sleep states
+- [x] Journey dock: Tonight · Sky book · Keepsakes
+- [x] Home terrace bento (gift box countdown, story tiles)
+- [x] Birth time corrected to **10:35 PM**
+- [x] Animated twinkling star map + constellation labels + sky chapters
 - [ ] Second wanderer (mini Luna moon blob)
-- [ ] Piggy + Luna occasional duet animations
-- [ ] Sprite sheet piggy (Browser-Buddy style walk cycle)
-- [ ] Character reacts to countdown phase (excited near Sep 12)
+- [ ] Sprite walk cycle for Mochi
 
 ## Phase 3 — Star maps
 

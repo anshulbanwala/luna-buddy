@@ -1,6 +1,6 @@
 /**
  * Personal configuration — edit .env or this file before gifting.
- * Birth: 12 September 1991, Najafgarh, Haryana
+ * Birth: 12 September 1991, 10:35 PM, Najafgarh, Haryana
  */
 
 function env(key: keyof ImportMetaEnv, fallback: string): string {
@@ -17,7 +17,7 @@ function envNum(key: keyof ImportMetaEnv, fallback: number): number {
 export const PERSONAL = {
   NAME: env('VITE_SUBJECT_NAME', 'Arpind'),
   BIRTH_DATE: env('VITE_BIRTH_DATE', '1991-09-12'),
-  BIRTH_TIME: env('VITE_BIRTH_TIME', '22:00'),
+  BIRTH_TIME: env('VITE_BIRTH_TIME', '22:35'),
   BIRTH_LAT: envNum('VITE_BIRTH_LAT', 28.6092),
   BIRTH_LON: envNum('VITE_BIRTH_LON', 77.0429),
   BIRTH_PLACE: env('VITE_BIRTH_PLACE', 'Najafgarh, Haryana'),
@@ -40,7 +40,6 @@ export const BIRTH_YEAR = 1991
 export const TARGET_YEAR = TEMPORAL_EVENT.YEAR
 export const SEPTEMBER_DAY = 12
 
-/** When daily memory unlocks begin (ISO date) */
 export const MEMORY_START = env('VITE_MEMORY_START', '2026-01-01')
 
 export interface StarDateEntry {
@@ -48,11 +47,10 @@ export interface StarDateEntry {
   label: string
 }
 
-/** Format: date|label,date|label — override via VITE_STAR_DATES */
 export function parseStarDates(raw: string | undefined): StarDateEntry[] {
   const source =
     raw ??
-    '1991-09-12|Night you arrived under Najafgarh sky,2016-09-12|Silver orbit — 25 years,2020-09-12|Quiet anniversary under monsoon clouds,2024-09-12|Last solo birthday before the reveal,2026-09-12|The day everything opens'
+    '1991-09-12|The night you arrived — 10:35 PM,2016-09-12|Twenty-five trips around the sun,2020-09-12|A quiet terrace birthday,2024-09-12|One more solo orbit,2026-09-12|The sky opens everything'
 
   return source.split(',').map((entry) => {
     const [date, ...labelParts] = entry.trim().split('|')
@@ -66,6 +64,12 @@ export function parseBirthDateTime(year?: number): Date {
   const [y, m, d] = PERSONAL.BIRTH_DATE.split('-').map(Number)
   const [hh, mm] = PERSONAL.BIRTH_TIME.split(':').map(Number)
   return new Date(year ?? y, m - 1, d, hh, mm, 0)
+}
+
+export function formatBirthTime(): string {
+  const [hh, mm] = PERSONAL.BIRTH_TIME.split(':').map(Number)
+  const d = new Date(2000, 0, 1, hh, mm)
+  return d.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit', hour12: true })
 }
 
 export function getOrbitalAge(now = new Date()): { years: number; days: number; totalDays: number } {

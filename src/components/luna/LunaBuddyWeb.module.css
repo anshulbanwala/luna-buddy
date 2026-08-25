@@ -1,321 +1,102 @@
 .page {
-  --luna-void: #08080c;
-  --luna-moon: #f5f0e6;
-  --luna-cream: #fff9f0;
-  --luna-gold: #d4bc82;
-  --luna-pink: #e8a0ad;
-  --luna-rose: #c97888;
-  --luna-muted: rgba(255, 255, 255, 0.42);
+  --luna-moon: #fff5f8;
+  --luna-gold: #ffc8a2;
+  --luna-pink: #ffb5a7;
+  --luna-muted: rgba(255, 240, 245, 0.45);
 
   min-height: 100vh;
   min-height: 100dvh;
   background:
-    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(139, 126, 200, 0.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 0%, #1a1428 0%, #0a0a0d 45%, #060608 100%);
+    radial-gradient(ellipse 100% 70% at 50% -10%, rgba(255, 180, 200, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 80% 100%, rgba(205, 180, 219, 0.12) 0%, transparent 45%),
+    linear-gradient(180deg, #1a1428 0%, #0e0c16 40%, #08070d 100%);
   color: var(--luna-moon);
   position: relative;
   overflow-x: hidden;
-  font-family: 'Inter', -apple-system, 'SF Pro Display', system-ui, sans-serif;
-}
-
-.bgMoon {
-  position: fixed;
-  top: 5%;
-  right: -15%;
-  z-index: 0;
-  pointer-events: none;
-  animation: slowDrift 100s ease-in-out infinite;
-  filter: blur(0.5px);
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 .main {
   position: relative;
   z-index: 1;
-  max-width: 420px;
+  max-width: 440px;
   margin: 0 auto;
-  padding: 52px 24px calc(88px + env(safe-area-inset-bottom));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  padding: 24px 20px calc(96px + env(safe-area-inset-bottom));
+  animation: pageIn 0.55s var(--ease-flow, ease);
 }
 
-.previewFab {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 50;
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(209, 184, 122, 0.25);
-  background: rgba(10, 10, 13, 0.7);
-  backdrop-filter: blur(12px);
-  color: rgba(209, 184, 122, 0.9);
-  font-family: -apple-system, 'SF Pro Rounded', system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.hero {
-  opacity: 0;
-  transform: scale(0.3) translateY(40px);
-  transition: all 0.7s cubic-bezier(0.34, 1.45, 0.64, 1);
-  min-height: 168px;
-  width: 100%;
+.lunaFloat {
   display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: hidden;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 12px 40px rgba(255, 150, 180, 0.2));
 }
 
-.heroIn {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-.messages {
-  text-align: center;
-  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.greeting {
-  font-family: -apple-system, 'SF Pro Rounded', system-ui, sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0 0 8px;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #fff9f0 0%, #e8d5b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.daily {
-  font-family: -apple-system, 'SF Pro Rounded', system-ui, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(250, 245, 232, 0.8);
-  margin: 0;
-  line-height: 1.55;
-  font-style: italic;
-  min-height: 1.55em;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.dailyWhisper {
-  color: #eb8c9e;
-  font-weight: 500;
-  font-style: normal;
-  animation: whisperPulse 0.4s cubic-bezier(0.34, 1.45, 0.64, 1);
-}
-
-.love {
-  margin: 12px 0 0;
-  font-size: 14px;
-  color: var(--luna-pink);
-  animation: loveGlow 2.5s ease-in-out infinite;
-}
-
-@keyframes whisperPulse {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.countdownCard {
-  width: 100%;
-  padding: 24px 26px;
-  border-radius: 24px;
-  text-align: center;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(235, 140, 158, 0.04) 40%,
-    rgba(139, 126, 200, 0.06) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: var(--shadow-soft, 0 24px 80px rgba(0, 0, 0, 0.35));
-  backdrop-filter: blur(20px);
-  transition: transform 0.5s var(--ease-flow, ease), box-shadow 0.5s ease;
-}
-
-.countdownLabel {
-  font-family: -apple-system, 'SF Pro Rounded', system-ui, sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--luna-muted);
-  text-transform: lowercase;
-  font-style: italic;
-}
-
-.countdownMsg {
-  font-family: -apple-system, 'SF Pro Rounded', system-ui, sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--luna-gold);
-  margin: 12px 0 6px;
-  line-height: 1.4;
-}
-
-.countdownLive {
-  font-family: ui-monospace, 'SF Mono', monospace;
-  font-size: 28px;
-  font-weight: 300;
-  color: rgba(245, 240, 230, 0.92);
-  margin: 8px 0 4px;
-  letter-spacing: 0.06em;
-  font-variant-numeric: tabular-nums;
-}
-
-.countdownFmt {
-  font-family: ui-monospace, 'SF Mono', monospace;
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(245, 240, 230, 0.45);
-  margin: 0;
-  letter-spacing: 0.04em;
-}
-
-.nav {
+.dock {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 40;
+  z-index: 50;
   display: flex;
   justify-content: center;
-  gap: 6px;
-  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-  background: linear-gradient(to top, rgba(6, 6, 8, 0.95), rgba(6, 6, 8, 0.7));
-  backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 8px;
+  padding: 10px 16px calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, rgba(8, 7, 13, 0.96), rgba(8, 7, 13, 0.75));
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 200, 221, 0.1);
 }
 
-.navBtn {
+.dockBtn {
   flex: 1;
   max-width: 120px;
-  padding: 10px 8px;
-  border-radius: 14px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: all 0.4s var(--ease-flow, ease);
-}
-
-.navBtnActive {
-  background: rgba(209, 184, 122, 0.12);
-  border-color: rgba(209, 184, 122, 0.25);
-  color: #d4bc82;
-}
-
-.orbitBadge {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 14px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.orbitLabel {
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: lowercase;
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.orbitBadge p {
-  margin: 6px 0 0;
-  font-size: 14px;
-  color: rgba(250, 245, 232, 0.75);
-}
-
-.skyCta {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 16px;
-  border: 1px solid rgba(209, 184, 122, 0.3);
-  background: linear-gradient(135deg, rgba(209, 184, 122, 0.1), rgba(80, 60, 140, 0.15));
-  color: #d4bc82;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.skyCta:active {
-  transform: scale(0.98);
-}
-
-.moonClock {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 16px 18px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.moonData {
-  flex: 1;
-}
-
-.phaseName {
-  font-family: -apple-system, 'SF Pro Rounded', system-ui, sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  margin: 0 0 10px;
-  color: rgba(250, 245, 232, 0.9);
-}
-
-.stats {
-  display: flex;
-  gap: 28px;
-}
-
-.stats > div {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 3px;
+  padding: 8px 6px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 240, 245, 0.4);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-flow, ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.statLabel {
-  font-family: -apple-system, 'SF Pro Rounded', system-ui, sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  color: var(--luna-muted);
-  text-transform: lowercase;
+.dockIcon {
+  font-size: 18px;
+  line-height: 1;
 }
 
-.statValue {
-  font-family: ui-monospace, 'SF Mono', monospace;
-  font-size: 13px;
-  color: rgba(245, 240, 230, 0.75);
+.dockBtnActive {
+  background: rgba(255, 180, 200, 0.12);
+  border-color: rgba(255, 180, 200, 0.25);
+  color: #ffc8d4;
+  transform: translateY(-2px);
 }
 
-.hint {
+.previewFab {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 55;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 200, 221, 0.25);
+  background: rgba(20, 16, 30, 0.75);
+  backdrop-filter: blur(12px);
+  color: rgba(255, 200, 221, 0.9);
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.3);
-  margin: 4px 0 0;
-  letter-spacing: 0.04em;
+  cursor: pointer;
 }
 
-.main {
-  animation: tabFade 0.55s var(--ease-flow, ease);
-}
-
-@keyframes tabFade {
+@keyframes pageIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -323,44 +104,8 @@
   }
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes loveGlow {
-  0%, 100% { opacity: 0.85; }
-  50% { opacity: 1; text-shadow: 0 0 20px rgba(235, 140, 158, 0.4); }
-}
-
-@keyframes slowDrift {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(-8px, 12px) rotate(8deg); }
-}
-
-@media (min-width: 768px) {
-  .page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .main {
-    padding-top: 32px;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .bgMoon {
-    animation: none;
-  }
-
-  .hero {
-    opacity: 1;
-    transform: none;
-  }
-
-  .love {
+  .main {
     animation: none;
   }
 }
