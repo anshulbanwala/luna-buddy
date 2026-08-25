@@ -1,0 +1,224 @@
+.wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-family: -apple-system, 'SF Pro Rounded', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #fff9f0 0%, #eb8c9e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.memoryCard {
+  display: flex;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  align-items: flex-start;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.memoryCardRevealed {
+  border-color: rgba(235, 140, 158, 0.35);
+  box-shadow: 0 0 30px rgba(235, 140, 158, 0.12);
+}
+
+.emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.memoryCard h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  color: #d4bc82;
+}
+
+.memoryCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(250, 245, 232, 0.78);
+}
+
+.uploadRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadBtn,
+.clearBtn {
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s var(--ease-flow, ease), border-color 0.25s ease;
+}
+
+.uploadBtn {
+  border: 1px solid rgba(212, 188, 130, 0.35);
+  background: linear-gradient(135deg, rgba(212, 188, 130, 0.12), rgba(139, 126, 200, 0.1));
+  color: #d4bc82;
+}
+
+.uploadBtn:disabled {
+  opacity: 0.5;
+}
+
+.clearBtn {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.uploadHint {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.32);
+  text-align: center;
+  line-height: 1.45;
+}
+
+.puzzleWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.grid {
+  display: grid;
+  gap: 6px;
+  width: min(100%, 280px);
+  aspect-ratio: 1;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, rgba(40, 32, 60, 0.9), rgba(20, 16, 30, 0.95));
+  color: #f5f0e6;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.tile:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.tileEmpty {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.04);
+  cursor: default;
+}
+
+.tileWon {
+  border-color: rgba(209, 184, 122, 0.35);
+}
+
+.tileEmoji {
+  font-size: 18px;
+}
+
+.tileNum {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: ui-monospace, monospace;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.resetBtn {
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+
+.gallery h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.memoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.memoryItem {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.memoryItem span {
+  font-size: 22px;
+}
+
+.memoryItem strong {
+  display: block;
+  font-size: 13px;
+  color: #d4bc82;
+  margin-bottom: 4px;
+}
+
+.memoryItem p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.lockedHint {
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: center;
+  margin: 8px 0 0;
+}

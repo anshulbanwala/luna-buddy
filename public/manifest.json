@@ -1,0 +1,10 @@
+{
+  "name": "Luna Buddy",
+  "short_name": "Luna",
+  "description": "Your celestial companion — star maps, memories, countdown",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060608",
+  "theme_color": "#0a0a0d",
+  "orientation": "portrait"
+}

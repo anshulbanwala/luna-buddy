@@ -1,0 +1,348 @@
+.stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.halo,
+.haloInner {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.halo {
+  background: radial-gradient(circle, rgba(209, 184, 122, 0.12) 0%, transparent 70%);
+  animation: haloPulse 4s ease-in-out infinite;
+}
+
+.haloInner {
+  background: radial-gradient(circle, rgba(235, 140, 158, 0.06) 0%, transparent 65%);
+}
+
+.haloLove {
+  background: radial-gradient(circle, rgba(235, 140, 158, 0.18) 0%, transparent 65%);
+  animation: haloLove 3s ease-in-out infinite;
+}
+
+.loveStage .halo {
+  background: radial-gradient(circle, rgba(235, 140, 158, 0.15) 0%, rgba(209, 184, 122, 0.08) 40%, transparent 70%);
+}
+
+.wrapper {
+  position: relative;
+  z-index: 2;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.shadow {
+  position: absolute;
+  bottom: 4px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  filter: blur(8px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.35s ease;
+}
+
+.floatLayer {
+  will-change: transform;
+}
+
+.float {
+  animation: lunaFloat 3.4s ease-in-out infinite;
+}
+
+.body {
+  position: relative;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+.pressing .body {
+  transform: scale(0.94) scaleY(1.04);
+}
+
+.pressing .shadow {
+  transform: scaleX(1.15);
+  opacity: 0.45;
+}
+
+.tap .body {
+  animation: tapBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.spin .body {
+  animation: spinJoy 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hearts .body,
+.kiss .body {
+  animation: heartSquish 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hug .body {
+  animation: hugSqueeze 1.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.moon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 38% 32%, #fff9f0 0%, #f5f0e6 45%, #e8dfd0 100%);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 0 60px rgba(209, 184, 122, 0.15),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 250, 240, 0.35);
+}
+
+.moonSheen {
+  position: absolute;
+  top: 8%;
+  left: 12%;
+  width: 35%;
+  height: 25%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.moonCrater,
+.moonCrater2 {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  pointer-events: none;
+}
+
+.moonCrater {
+  width: 18%;
+  height: 18%;
+  top: 55%;
+  left: 25%;
+}
+
+.moonCrater2 {
+  width: 12%;
+  height: 12%;
+  top: 30%;
+  right: 22%;
+}
+
+.blush {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+}
+
+.blushDot {
+  display: block;
+  border-radius: 50%;
+  background: rgba(242, 160, 168, 0.5);
+  animation: blushPulse 3s ease-in-out infinite;
+}
+
+.eyes {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+}
+
+.eye {
+  display: block;
+  border-radius: 999px;
+  background: rgba(10, 10, 13, 0.88);
+  transition: height 0.1s ease, border-radius 0.2s ease;
+}
+
+.eyeHappy {
+  border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+}
+
+.mouth {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 50% 50%;
+  background: transparent;
+  border-bottom: 2.5px solid rgba(10, 10, 13, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mouthHappy {
+  opacity: 1;
+  animation: smileWiggle 0.4s ease;
+}
+
+.scarf {
+  position: absolute;
+  color: #c8d4ea;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+  animation: scarfWave 2.2s ease-in-out infinite;
+}
+
+.starCompanion {
+  position: absolute;
+  top: 8%;
+  right: 18%;
+  font-size: 14px;
+  color: rgba(209, 184, 122, 0.7);
+  animation: starBob 2.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.starCompanionLove {
+  color: rgba(235, 140, 158, 0.9);
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  animation: particleFly 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+.particle.heart {
+  color: #eb8c9e;
+  font-size: 16px;
+  text-shadow: 0 0 8px rgba(235, 140, 158, 0.6);
+}
+
+.particle.sparkle {
+  color: #f5e6c0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.particle.star {
+  color: #d1b87a;
+  font-size: 12px;
+}
+
+/* Keyframes */
+@keyframes lunaFloat {
+  0%, 100% { transform: translateY(5px) rotate(-1deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes tapBounce {
+  0% { transform: scale(1) translateY(0); }
+  30% { transform: scale(1.14, 0.88) translateY(4px); }
+  55% { transform: scale(0.95, 1.06) translateY(-6px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes spinJoy {
+  0% { transform: rotate(0deg) scale(1); }
+  40% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes heartSquish {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.18, 0.85); }
+  50% { transform: scale(0.92, 1.08); }
+  75% { transform: scale(1.06, 0.96); }
+  100% { transform: scale(1); }
+}
+
+@keyframes hugSqueeze {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.08, 0.92); }
+  60% { transform: scale(0.96, 1.04); }
+}
+
+@keyframes scarfWave {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  50% { transform: rotate(4deg) translateY(-2px); }
+}
+
+@keyframes blushPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.75; }
+}
+
+@keyframes haloPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes haloLove {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes starBob {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+  50% { transform: translateY(-6px) rotate(15deg); opacity: 1; }
+}
+
+@keyframes smileWiggle {
+  0%, 100% { transform: translateX(-50%) scaleX(1); }
+  50% { transform: translateX(-50%) scaleX(1.2); }
+}
+
+@keyframes particleFly {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0) scale(0.2);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-70px) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .scarf,
+  .halo,
+  .haloLove,
+  .starCompanion,
+  .blushDot {
+    animation: none;
+  }
+
+  .tap .body,
+  .spin .body,
+  .hearts .body,
+  .kiss .body,
+  .hug .body {
+    animation: none;
+    transform: scale(1.05);
+  }
+}
